@@ -81,16 +81,15 @@ async def stillalive(ctx):
         await lyric("over every mistake.", 1.8, ctx)
         await lyric("You just keep on trying", 1.8, ctx)
         await lyric("till you run out of cake", 1.8, ctx)
-        await lyric("And the science gets done,", 1.8, ctx) # This should be a comma, not a period
+        await lyric("And the science gets done.", 1.8, ctx)
         await lyric("And you make a neat gun.", 1.8, ctx)
         await lyric("For the people who are", 1.5, ctx)
         await lyric("**still alive**", 1.5, ctx)
 
         await lyric("I'm not even angry.", 8, ctx)
         await lyric("I'm being so sincere right now.", 4, ctx)
-        await lyric("Even though you", 4, ctx)
-        await lyric("broke my heart", 2, ctx) # This isn't where the line ends, it continues till "and killed me"
-        await lyric("and killed me.", 2, ctx)
+        await lyric("Even though you broke my heart.", 4, ctx)
+        await lyric("and killed me.", 4, ctx)
         await lyric("And tore me to pieces,", 3, ctx)
         await lyric("And threw every piece into", 3, ctx)
         await lyric("a fire.", 2.5, ctx)
@@ -98,7 +97,7 @@ async def stillalive(ctx):
         await lyric("I was so happy for you!", 3, ctx)
         await lyric("Now these points of data", 1.8, ctx)
         await lyric("make a beautiful line", 1.8, ctx)
-        await lyric("And we're out of beta", 1.8, ctx) # This shouldn't have a period, the lines flow too fast at that moment
+        await lyric("And we're out of beta.", 1.8, ctx)
         await lyric("We're releasing on time.", 1.8, ctx)
         await lyric("So I'm GLaD I got burned.", 1.8, ctx)
         await lyric("Think of all the things we learned", 1.5, ctx)
