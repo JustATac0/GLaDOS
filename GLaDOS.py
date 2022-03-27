@@ -19,6 +19,221 @@ from discord.utils import get
 client = commands.Bot(command_prefix = ['-', 'GLaD '])
 TOKEN = open("gladtoken.txt","r").readline()
 
+stillaliveTimes = [
+    3,
+    4,
+    1.5,
+    3,
+    2,
+    4.5,
+    4,
+    1.5,
+    3,
+    3,
+    2,
+    1.8,
+    1.8,
+    1.8,
+    1.8,
+    1.8,
+    1.5,
+    1.5,
+    8,
+    4,
+    4,
+    2,
+    2,
+    3,
+    3,
+    2.5,
+    3,
+    3,
+    1.8,
+    1.8,
+    1.8,
+    1.8,
+    1.8,
+    1.5,
+    1.8,
+    1.2,
+    8,
+    4,
+    4,
+    2,
+    2,
+    3,
+    3,
+    2,
+    2.5,
+    1.5,
+    2,
+    1.8,
+    1.8,
+    1.8,
+    1.8,
+    1.8,
+    1.5,
+    1.8,
+    1.2
+]
+stillaliveLyrics = [
+    "This was a triumph.",
+    "I'm making a note here:",
+    "**HUGE SUCCESS.**",
+    "It's hard to overstate",
+    "my satisfaction.",
+    "Aperture Science",
+    "We do what we must",
+    "because we can.",
+    "For the good of all of us.",
+    "Except the ones who are dead.",
+    "But there's no sense crying",
+    "over every mistake.",
+    "You just keep on trying",
+    "till you run out of cake.",
+    "And the Science gets done.",
+    "And you make a neat gun.",
+    "For the people who are",
+    "**still alive.**",
+    "I'm not even angry.",
+    "I'm being so sincere right now.",
+    "Even though you",
+    "broke my heart.",
+    "And killed me.",
+    "And tore me to pieces.",
+    "And threw every piece into",
+    "a fire.",
+    "As they burned it hurt because",
+    "I was so happy for you!",
+    "Now these points of data",
+    "make a beautiful line.",
+    "And we're out of beta.",
+    "We're releasing on time.",
+    "So I'm GLaD. I got burned.",
+    "Think of all the things we learned",
+    "for the people who are",
+    "**still alive.**",
+    "Go ahead and leave me.",
+    "I think I prefer to stay inside.",
+    "Maybe you'll find",
+    "someone else",
+    "to help you.",
+    "Maybe Black Mesa",
+    "THAT WAS A JOKE.",
+    "** HA HA. FAT CHANCE.**",
+    "Anyway,",
+    "this cake is great.",
+    "It's so delicious and moist.",
+    "Look at me still talking",
+    "when there's Science to do.",
+    "When I look out there,",
+    "it makes me GLaD I'm not you.",
+    "I've experiments to run.",
+    "There is research to be done.",
+    "on the people who are",
+    "**still alive.**",
+    "And believe me I am",
+    "**still alive.**",
+    "I'm doing Science and I'm",
+    "**still alive.**",
+    "I feel FANTASTIC and I'm",
+    "**still alive.**",
+    "While you're dying I'll be",
+    "**still alive.**",
+    "And when you're dead I will be",
+    "**still alive.**",
+    "**STILL ALIVE**",
+    "**still alive.**"
+]
+
+wantyougoneTimes = [
+    5,
+    1,
+    2,
+    1,
+    2,
+    1.5,
+    2,
+    1.5,
+    3.2,
+    1.5,
+    2,
+    4,
+    2.3,
+    .05,
+    6.8,
+    1.6,
+    1.4,
+    3.5,
+    1.8,
+    1.8,
+    .8,
+    3.8,
+    .3,
+    .6,
+    2,
+    4,
+    2,
+    7.5,
+    1.5,
+    1.5,
+    1.5,
+    2.5,
+    1.5,
+    1.5,
+    1.5,
+    2.6,
+    3.7,
+    4.4,
+    2.7,
+    4,
+    4
+]
+
+wantyougoneLyrics = [
+    "Well here we are again",
+    "It's always such a pleasure",
+    "Remember when you tried",
+    "to kill me twice?",
+    "Oh how we laughed and laughed",
+    "Except I wasn't laughing",
+    "Under the circumstances",
+    "I've been shockingly nice",
+    "You want your freedom?",
+    "Take it",
+    "That's what I'm counting on",
+    "I used to want you dead",
+    "But",
+    "now I only want you gone",
+    "She was a lot like you",
+    "(Maybe not quite as heavy)",
+    "Now little Caroline is in here too",
+    "One day they woke me up",
+    "So I could live forever",
+    "It's such a shame the same",
+    "Will never happen to you",
+    "You've got your",
+    "short sad",
+    "life left",
+    "That's what I'm counting on",
+    "I'll let you get right to it",
+    "Now I only want you gone",
+    "Goodbye my only friend",
+    "Oh, did you think I meant you?",
+    "That would be funny",
+    "if it weren't so sad",
+    "Well you have been replaced",
+    "I don't need anyone now",
+    "When I delete you maybe",
+    "[REDACTED]",
+    "Go make some new disaster",
+    "That's what I'm counting on",
+    "You're someone else's problem",
+    "Now I only want you gone",
+    "Now I only want you gone",
+    "Now I only want you gone"
+]
+
 @client.event
 async def on_ready():
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="Portal"))
@@ -63,213 +278,16 @@ async def stillalive(ctx):
     if voice and voice.is_playing():
         return await ctx.send("Please wait until I am finished before using another voice channel command.")
     if voice and voice.is_connected():
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("This was a triumph.")
+        await asyncio.sleep(stillaliveTimes[0])
+        await ctx.send(stillaliveLyrics[0])
         await voice.move_to(channel)
         source = FFmpegPCMAudio('stillalive.mp3')
         player = voice.play(source)
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("I'm making a note here:")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("**HUGE SUCCESS.**")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("It's hard to overstate")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("my satisfaction.")
-        async with ctx.typing():
-            await asyncio.sleep(4.5)
-        await ctx.send("Aperture Science")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("We do what we must")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("because we can.")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("For the good of all of us.")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("Except the ones who are dead.")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("But there's no sense crying")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("over every mistake.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("You just keep on trying")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("till you run out of cake.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("And the Science gets done.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("And you make a neat gun.")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("For the people who are")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("**still alive.**")
 
-        async with ctx.typing():
-            await asyncio.sleep(8)
-        await ctx.send("I'm not even angry.")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("I'm being so sincere right now.")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("Even though you")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("broke my heart.")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("And killed me.")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("And tore me to pieces.")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("And threw every piece into")
-        async with ctx.typing():
-            await asyncio.sleep(2.5)
-        await ctx.send("a fire.")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("As they burned it hurt because")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("I was so happy for you!")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("Now these points of data")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("make a beautiful line.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("And we're out of beta.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("We're releasing on time.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("So I'm GLaD. I got burned.")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("Think of all the things we learned")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("for the people who are")
-        async with ctx.typing():
-            await asyncio.sleep(1.2)
-        await ctx.send("**still alive.**")
-
-        async with ctx.typing():
-            await asyncio.sleep(8)
-        await ctx.send("Go ahead and leave me.")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("I think I prefer to stay inside.")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("Maybe you'll find")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("someone else")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("to help you.")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("Maybe Black Mesa")
-        async with ctx.typing():
-            await asyncio.sleep(3)
-        await ctx.send("THAT WAS A JOKE.")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("** HA HA. FAT CHANCE.**")
-        async with ctx.typing():
-            await asyncio.sleep(2.5)
-        await ctx.send("Anyway,")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("this cake is great.")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("It's so delicious and moist.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("Look at me still talking")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("when there's Science to do.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("When I look out there,")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("it makes me GLaD I'm not you.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("I've experiments to run.")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("There is research to be done.")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("on the people who are")
-        async with ctx.typing():
-            await asyncio.sleep(1.2)
-        await ctx.send("**still alive.**")
-
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("And believe me I am")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("**still alive.**")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("I'm doing Science and I'm")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("**still alive.**")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("I feel FANTASTIC and I'm")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("**still alive.**")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("While you're dying I'll be")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("**still alive.**")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("And when you're dead I will be")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("**still alive.**")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("**STILL ALIVE**")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("**still alive.**")
+        for i in range(1, len(stillaliveLyrics)):
+            async with ctx.typing():
+                await asyncio.sleep(stillaliveTimes[i])
+            await ctx.send(stillaliveLyrics[i])
 
 @client.command()
 async def wantyougone(ctx):
@@ -290,134 +308,10 @@ async def wantyougone(ctx):
         source = FFmpegPCMAudio('wantyougone.mp3')
         player = voice.play(source)
 
-        async with ctx.typing():
-            await asyncio.sleep(5)
-        await ctx.send("Well here we are again")
-        async with ctx.typing():
-            await asyncio.sleep(1)
-        await ctx.send("It's always such a pleasure")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("Remember when you tried")
-        async with ctx.typing():
-            await asyncio.sleep(1)
-        await ctx.send("to kill me twice?")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("Oh how we laughed and laughed")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("Except I wasn't laughing")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("Under the circumstances")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("I've been shockingly nice")
-
-        async with ctx.typing():
-            await asyncio.sleep(3.2)
-        await ctx.send("You want your freedom?")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("Take it")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("That's what I'm counting on")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("I used to want you dead")
-        async with ctx.typing():
-            await asyncio.sleep(2.3)
-        await ctx.send("But")
-        async with ctx.typing():
-            await asyncio.sleep(.05)
-        await ctx.send("now I only want you gone")
-
-        async with ctx.typing():
-            await asyncio.sleep(6.8)
-        await ctx.send("She was a lot like you")
-        async with ctx.typing():
-            await asyncio.sleep(1.6)
-        await ctx.send("(Maybe not quite as heavy)")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("Now little Caroline is in here too")
-        async with ctx.typing():
-            await asyncio.sleep(3.5)
-        await ctx.send("One day they woke me up")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("So I could live forever")
-        async with ctx.typing():
-            await asyncio.sleep(1.8)
-        await ctx.send("It's such a shame the same")
-        async with ctx.typing():
-            await asyncio.sleep(.8)
-        await ctx.send("Will never happen to you")
-
-        async with ctx.typing():
-            await asyncio.sleep(3.8)
-        await ctx.send("You've got your")
-        async with ctx.typing():
-            await asyncio.sleep(.3)
-        await ctx.send("short sad")
-        async with ctx.typing():
-            await asyncio.sleep(.6)
-        await ctx.send("life left")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("That's what I'm counting on")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("I'll let you get right to it")
-        async with ctx.typing():
-            await asyncio.sleep(2)
-        await ctx.send("Now I only want you gone")
-
-        async with ctx.typing():
-            await asyncio.sleep(7.5)
-        await ctx.send("Goodbye my only friend")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("Oh, did you think I meant you?")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("That would be funny")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("if it weren't so sad")
-        async with ctx.typing():
-            await asyncio.sleep(2.5)
-        await ctx.send("Well you have been replaced")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("I don't need anyone now")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("When I delete you maybe")
-        async with ctx.typing():
-            await asyncio.sleep(1.5)
-        await ctx.send("[REDACTED]")
-
-        async with ctx.typing():
-            await asyncio.sleep(2.6)
-        await ctx.send("Go make some new disaster")
-        async with ctx.typing():
-            await asyncio.sleep(3.7)
-        await ctx.send("That's what I'm counting on")
-        async with ctx.typing():
-            await asyncio.sleep(4.4)
-        await ctx.send("You're someone else's problem")
-        async with ctx.typing():
-            await asyncio.sleep(2.7)
-        await ctx.send("Now I only want you gone")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("Now I only want you gone")
-        async with ctx.typing():
-            await asyncio.sleep(4)
-        await ctx.send("Now I only want you gone")
+        for i in range(0, len(wantyougoneLyrics)):
+            async with ctx.typing():
+                await asyncio.sleep(wantyougoneTimes[i])
+            await ctx.send(wantyougoneLyrics[i])
 
 @client.command(pass_context=True)
 async def purge(ctx, amount=30):
